@@ -189,3 +189,38 @@ int main()
 
     return 0;
 }
+
+
+void initializeList(List *pointerToList)
+{
+    pointerToList->head = NULL;
+    pointerToList->tail = NULL;
+    pointerToList->size = 0;
+}
+void designList(int size,List *pointerToList)
+{
+    for(int j = 0; j < size; ++j)
+    {
+        printf("Enter the information of student %i\n", j + 1);
+        if(pointerToList->head != NULL)
+        {
+            ListNode* newPtr = (ListNode*) malloc(sizeof(ListNode));
+
+            newPtr = enterInformationOfStudent();
+            newPtr->next = pointerToList->tail->next;
+            pointerToList->tail->next = newPtr;
+            pointerToList->tail = pointerToList->tail->next;
+        }
+        else
+        {
+            ListNode* newPtr = (ListNode*) malloc(sizeof(ListNode));
+
+            newPtr = enterInformationOfStudent();
+            newPtr->next = pointerToList->head;
+            pointerToList->head = newPtr;
+            pointerToList->tail = newPtr;
+        }
+
+        (pointerToList->size)++;
+    }
+}
